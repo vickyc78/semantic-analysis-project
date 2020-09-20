@@ -2,7 +2,7 @@
 const express = require("express");
 // let mongoose = require("mongoose");
 let bodyParser = require("body-parser");
-
+let cors = require("cors");
 // let Schema = mongoose.Schema;
 // // Create Express app
 let router = express.Router();
@@ -44,6 +44,7 @@ app.get("/:word", (req, res) => {
   console.log("KKKKKKKKK", sendData);
   res.status(200).json(sendData);
 });
+app.use(cors());
 // // Start the Express server
 app.listen(3000, () => console.log("Server running on port 3000!"));
 // var Sentiment = require("sentiment");
