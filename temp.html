@@ -4,6 +4,15 @@
     Review: <input type="text" id="myText" value="Mickey" />
 
     <button onclick="myFunction()">Review it</button>
+    <br />
+    <span
+      >Total Review Count=
+      <p id="showReviewCount">showReviewCount</p>
+    </span>
+    <span
+      >Current Review Count=
+      <p id="showCurrentReviewCount">showCurrentReviewCount</p>
+    </span>
 
     <script>
       function myFunction() {
@@ -12,7 +21,11 @@
         request.open("GET", `http://localhost:3000/${data}`);
         request.send();
         request.onload = function() {
-          console.log(request.response);
+          let output = JSON.parse(request.response);
+          document.getElementById("showReviewCount").innerHTML =
+            output.totalReview;
+          document.getElementById("showCurrentReviewCount").innerHTML =
+            output.currentReview;
         };
       }
     </script>
