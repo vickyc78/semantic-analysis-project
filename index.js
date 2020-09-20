@@ -2,6 +2,7 @@
 const express = require("express");
 // let mongoose = require("mongoose");
 let bodyParser = require("body-parser");
+
 // let Schema = mongoose.Schema;
 // // Create Express app
 let router = express.Router();
@@ -28,12 +29,20 @@ let reviewRoutes = require("./controllers/ReviewController");
 //   next();
 // });
 // // A sample route
-// app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/", (req, res) => res.send("Hello World!"));
+var temp = 0,
+  count = 0;
 app.get("/:word", (req, res) => {
+  count++;
+  console.log("req.params.word", req.params.word);
   var Sentiment = require("sentiment");
   var sentiment = new Sentiment();
   var result = sentiment.analyze(req.params.word);
-  res.send(result);
+  temp += result.score;
+  console.log("temp temp", temp);
+  let sendData = temp / count;
+  console.log("KKKKKKKKK", sendData);
+  res.status(200).json(sendData);
 });
 // // Start the Express server
 app.listen(3000, () => console.log("Server running on port 3000!"));

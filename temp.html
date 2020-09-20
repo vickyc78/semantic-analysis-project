@@ -1,5 +1,20 @@
+<!DOCTYPE html>
 <html>
   <body>
-    <input type="text" />
+    Review: <input type="text" id="myText" value="Mickey" />
+
+    <button onclick="myFunction()">Review it</button>
+
+    <script>
+      function myFunction() {
+        let data = document.getElementById("myText").value;
+        let request = new XMLHttpRequest();
+        request.open("GET", `http://localhost:3000/${data}`);
+        request.send();
+        request.onload = function() {
+          console.log(request.response);
+        };
+      }
+    </script>
   </body>
 </html>
